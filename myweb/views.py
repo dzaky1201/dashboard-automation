@@ -14,7 +14,8 @@ def index(request):
             password = form.cleaned_data["password"]
             config = form.cleaned_data["config"]
             
-            # conf = config.split('\n')
+            conf = config.split('\n')
+            print(conf)
             
             ssh_client = paramiko.SSHClient()
             ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -27,17 +28,17 @@ def index(request):
             print('Lagi diconfig.....')
             
             for index, item in enumerate(config.split('\n')):
-                conn.send(item.replace('\r', ''))
+                conn.send(item + '\n')
                 time.sleep(1)
-                if index == len(conf) - 1 :
+                if index == len(config.split('\n')) - 1 :
                     output = conn.recv(65535)
                     print(output)
+                    if "Invalid input" in output.decode('utf-8') or "Ambiguous command" in output.decode('utf-8'):
+                        ssh_client.close()
+                        return HttpResponseRedirect("/home/detail")
                     print('config selesai')
                     ssh_client.close()
                     return HttpResponseRedirect("/home")
-            # for x in conf:
-            #     print(x.replace('\r',''))
-            # return HttpResponseRedirect("/home")
     else:
         form = ConfigForms
     return render(request, 'index.html', {'form': form})
