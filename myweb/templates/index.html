@@ -1,0 +1,42 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% tailwind_css %} {% load tailwind_filters %}
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen">
+      <div class="bg-blue-500 p-3">
+        <h1 class="text-white text-center">Network Automation</h1>
+      </div>
+      <div
+        class="border max-h-screen w-[410px] self-center rounded-lg mt-3 drop-shadow-md flex flex-col p-4"
+      >
+        <form class="flex flex-col" method="POST">
+          <!-- <label for="ipaddress"> Masukan ip address </label>
+          <input type="text" name="ipaddress" class="rounded-lg mt-2" />
+          <label for="username" class="mt-2"> Username </label>
+          <input type="text" name="username" class="rounded-lg mt-2" />
+          <label for="password" class="mt-2"> Masukan password </label>
+          <input type="password" name="password" class="rounded-lg mt-2" />
+          <label for="config" class="mt-2"> Masukan config </label>
+          <textarea
+            type="text"
+            name="config"
+            class="rounded-lg mt-2"
+          ></textarea> -->
+          {% csrf_token %} {{ form|crispy }}
+          <button
+            type="submit"
+            class="rounded-full bg-blue-500 p-2 text-white mt-3"
+          >
+            start
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
