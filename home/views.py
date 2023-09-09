@@ -71,12 +71,24 @@ def address_page(request):
             mask = form.cleaned_data["mask"]
             status = form.cleaned_data["status"]
             
+            interface_list = interface.split('\n')
+            address_list = address.split('\n')
+            mask_list = mask.split('\n')
+            status_list = status.split('\n')
+            
             conf = [
                 'conf t',
-                'int {}'.format(interface),
-                'ip addr {} {}'.format(address, mask),
-                '{}'.format(status)
             ]
+            if len(interface_list) != 1 and len(address_list) != 1  and len(mask_list) != 1 and len(status_list) != 1:
+                for index, x in enumerate(interface_list):
+                    if len(interface_list) == len(address_list) == len(mask_list) == len(status_list):
+                        conf.append(f"int {x}")
+                        conf.append(f"ip addr {address_list[index]} {mask_list[index]}")
+                        conf.append(f"{status_list[index]}")
+            else:
+                 conf.append(f"int {interface}")
+                 conf.append(f"ip addr {address} {mask}")
+                 conf.append(status)
             
             ssh_client = paramiko.SSHClient()
             ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -89,7 +101,7 @@ def address_page(request):
             print('Lagi diconfig.....')
             
             for index, item in enumerate(conf):
-                conn.send(item + '\n')
+                conn.send(re.sub('\r', '', item)  + '\n')
                 time.sleep(1)
                 if index == len(conf) - 1 :
                     output = conn.recv(65535)

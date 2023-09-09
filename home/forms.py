@@ -42,21 +42,56 @@ class ConfigIpAddress(forms.Form):
         widget=forms.PasswordInput(attrs={"class": "rounded-lg mt-2 w-full"})
     )
     interface = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "rounded-lg mt-2 w-full", "placeholder": "ex : e1/0"}),
-        label= 'interface'
+        required=True,
+        widget=forms.widgets.Textarea(
+            attrs={
+                "placeholder": "ex :\ne1/1\ne1/2\ne1/3",
+                "class": "rounded-lg mt-3",
+                "rows": 4
+            }
+
+        ),
+
+        label="Interface",
     )
     address = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "rounded-lg mt-2 w-full", "placeholder": "ex : 192.x.x.x"}),
-        label="Ip address"
+        required=True,
+        widget=forms.widgets.Textarea(
+            attrs={
+                "placeholder": "ex :\n10.10.10.1\n11.11.11.1\n12.12.12.1",
+                "class": "rounded-lg mt-3",
+                "rows": 4
+            }
+
+        ),
+
+        label="Ip Address",
     )
     mask = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "rounded-lg mt-2 w-full", "placeholder": "ex : 255.255.x.x"}),
-        label="mask"
+        required=True,
+        widget=forms.widgets.Textarea(
+            attrs={
+                "placeholder": "ex :\n255.255.255.0\n255.255.255.0\n255.255.255.0",
+                "class": "rounded-lg mt-3",
+                "rows": 4
+            }
+
+        ),
+
+        label="Mask",
     )
     status = forms.CharField(
-        widget=forms.TextInput(attrs={"class": "rounded-lg mt-2 w-full", "placeholder": "ex : no sh | sh"}),
-        label="status",
-        required=False
+        required=True,
+        widget=forms.widgets.Textarea(
+            attrs={
+                "placeholder": "ex :\nno sh\nno sh\nno sh",
+                "class": "rounded-lg mt-3",
+                "rows": 4
+            }
+
+        ),
+
+        label="Status",
     )
 
 class ConfigOspf(forms.Form):
