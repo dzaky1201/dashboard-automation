@@ -143,11 +143,10 @@ def ospf_page(request):
                 for index, x in enumerate(network_list):
                     if len(network_list) == len(area_list):
                         conf.append(f"network {x} 0.0.0.0 area {area_list[index]}")
-                    
+            else:
+                conf.append(f"network {network} 0.0.0.0 area {area}")     
             # for x in conf:
             #     print(re.sub('\r', '', x))
-            
-                
             
             ssh_client = paramiko.SSHClient()
             ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
