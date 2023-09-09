@@ -12,30 +12,28 @@
       <div class="bg-blue-500 p-3">
         <h1 class="text-white text-center">Network Automation</h1>
       </div>
-      <div
-        class="border max-h-screen w-[410px] self-center rounded-lg mt-3 drop-shadow-md flex flex-col p-4"
-      >
-        <form class="flex flex-col" method="POST">
-          <!-- <label for="ipaddress"> Masukan ip address </label>
-          <input type="text" name="ipaddress" class="rounded-lg mt-2" />
-          <label for="username" class="mt-2"> Username </label>
-          <input type="text" name="username" class="rounded-lg mt-2" />
-          <label for="password" class="mt-2"> Masukan password </label>
-          <input type="password" name="password" class="rounded-lg mt-2" />
-          <label for="config" class="mt-2"> Masukan config </label>
-          <textarea
-            type="text"
-            name="config"
-            class="rounded-lg mt-2"
-          ></textarea> -->
-          {% csrf_token %} {{ form|crispy }}
+      <div class="flex flex-row m-auto gap-2">
+        <a href="/home/address">
           <button
-            type="submit"
-            class="rounded-full bg-blue-500 p-2 text-white mt-3"
+            class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
           >
-            start
-          </button>
-        </form>
+            Set Ip Address
+          </button></a
+        >
+        <a href="/home/l3vpn">
+          <button
+            class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
+          >
+            L3VPN
+          </button></a
+        >
+        <a href="/home/ospf">
+          <button
+            class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
+          >
+            OSPF
+          </button></a
+        >
       </div>
     </div>
   </body>
