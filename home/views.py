@@ -1,5 +1,5 @@
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .forms import ConfigForms, ConfigIpAddress, ConfigOspf
 from django.shortcuts import render, redirect
@@ -51,14 +51,6 @@ def detail(request):
     template = loader.get_template('detail/index.html')
     return HttpResponse(template.render())
 
-def success_page(request):
-    template = loader.get_template('success_page/index.html')
-    return HttpResponse(template.render())
-
-def failed_page(request):
-    template = loader.get_template('failed_page/index.html')
-    return HttpResponse(template.render())
-
 def address_page(request):
     if request.method == "POST":
         form = ConfigIpAddress(request.POST)
@@ -108,11 +100,13 @@ def address_page(request):
                     print(output)
                     if "Invalid input" in output.decode('utf-8') or "Ambiguous command" in output.decode('utf-8'):
                         ssh_client.close()
-                        return HttpResponseRedirect("/home/failed")
+                        return JsonResponse({'success': False})
                     
                     print('config selesai')
                     ssh_client.close()
-                    return HttpResponseRedirect("/home/success")
+                    return JsonResponse({'success': True})
+        else:
+             return JsonResponse({'success': False})
     else:
         form = ConfigIpAddress
     return render(request, 'home/address.html', {'form': form})

@@ -1,40 +1,31 @@
-{% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% tailwind_css %} {% load tailwind_filters %}
-  </head>
-  <body>
-    <div class="flex flex-col min-h-screen">
-      <div class="bg-blue-500 p-3">
-        <h1 class="text-white text-center">Network Automation</h1>
-      </div>
-      <div class="flex flex-row m-auto gap-2">
-        <a href="/home/address">
-          <button
-            class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
-          >
-            Set Ip Address
-          </button></a
-        >
-        <a href="/home/l3vpn">
-          <button
-            class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
-          >
-            L3VPN
-          </button></a
-        >
-        <a href="/home/ospf">
-          <button
-            class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
-          >
-            OSPF
-          </button></a
-        >
-      </div>
-    </div>
-  </body>
-</html>
+{% extends 'general_template.html' %} {% block title %}Home{% endblock %} 
+{% block content%}
+<div class="flex flex-col min-h-screen">
+  <div class="bg-blue-500 p-3">
+    <h1 class="text-white text-center">Network Automation</h1>
+  </div>
+  <div class="flex flex-row m-auto gap-2">
+    <a href="/home/address">
+      <button
+        class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
+      >
+        Set Ip Address
+      </button></a
+    >
+    <a href="/home/l3vpn">
+      <button
+        class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
+      >
+        L3VPN
+      </button></a
+    >
+    <a href="/home/ospf">
+      <button
+        class="bg-blue-500 max-w-max h-[50px] rounded-lg text-white ps-2 pe-2"
+      >
+        OSPF
+      </button></a
+    >
+  </div>
+</div>
+{% endblock %}

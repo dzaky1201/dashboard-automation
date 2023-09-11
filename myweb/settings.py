@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django_browser_reload',
     "crispy_forms",
     "crispy_tailwind",
+    "django_icons",
+    'jquery',
     'home',
     'myweb'
 ]
